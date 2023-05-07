@@ -12,10 +12,10 @@ const LoginForm = () => {
   }
 
   return (
-    <div className="flex items-center justify-center h-screen">
+    <div className=" min-h-screen bg-[#2B7C6D] flex items-center -mt-10 ">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
-      <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-      <h1 className="text-center text-3xl font-extrabold text-gray-900 mb-6 ">Login to Skillfusion</h1>
+      <div className="bg-white ml-16 rounded-md md:ml-0 py-8 px-4 shadow sm:rounded-lg sm:px-10">
+      <h1 className="text-center md:text-3xl font-extrabold text-gray-900  mb-6 ">Login to Skillfusion</h1>
       <form onSubmit={handleSubmit} className="bg-blue-100 shadow-lg rounded px-8 pt-6 pb-8 mb-4 flex flex-col">
         <div className="mb-4">
           <label htmlFor="email" className="block text-gray-700 font-bold mb-2">Email:</label>

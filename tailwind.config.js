@@ -5,8 +5,17 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'regal-blue': '#243c5a',
+      },
+
+    },
   },
   plugins: [],
+
+  variants: {
+    display:['group-hover']
+   }
 }
 

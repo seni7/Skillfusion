@@ -3,6 +3,7 @@ import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
+import PersonPinIcon from '@mui/icons-material/PersonPin';
 import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
 import Link from "next/link";
 export default function BasicMenu() {
@@ -25,8 +26,8 @@ export default function BasicMenu() {
         onClick={handleClick}
         className="profile-menu-flex"
       >
-        <MenuRoundedIcon />
-        <AccountCircleRoundedIcon />
+        {/* <MenuRoundedIcon /> */}
+        <AccountCircleRoundedIcon className=" object-fill"/>
       </div>
       <Menu
         id="basic-menu"
