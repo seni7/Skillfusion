@@ -1,11 +1,11 @@
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import Header from "./Header";
+import Footer from "./Footer";
 const layout = ({children}) => {
     return ( 
          <>
          <Header/>
-         {children}
-        
+         {children} 
+         <Footer/>
          </>
      );
 }

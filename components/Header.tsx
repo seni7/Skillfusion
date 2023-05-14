@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import Headerprofail from "../components/Headerprofail"
+import Headerprofail from "./Headerprofail"
 import {MenuIcon, SearchIcon, UserCircleIcon} from '@heroicons/react/solid'
 function Header() {
   return (
@@ -10,9 +10,7 @@ function Header() {
         <div className="relative flex items-center h-10 cursor-pointer">
             
              <Link href="/">
-             <Image
-            
-             src="/Logo0.png" 
+             <Image  src="/Logo0.png" alt=""
             //  layout="fill"
              objectFit="contain"
              objectPosition="left"

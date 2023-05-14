@@ -7,6 +7,7 @@ function Banner() {
        <div className="relative  h-[250px] sm:h-[300px] 
     lg:h-[350px] xl:h-[400px] 2xl:h-[450px]">
         <Image
+        alt=""
         src="/banner.jpg"
         layout="fill"
         objectFit="cover"

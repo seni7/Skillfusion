@@ -3,6 +3,7 @@ import Link from 'next/link'
 import CloseIcon from '@mui/icons-material/Close';
 const RegistrationForm = () => {
   const [showPopup, setShowPopup] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -13,7 +14,7 @@ const RegistrationForm = () => {
   const [password, setPassword] = useState('');
   return (
     <>
-      {showPopup && (
+      { showPopup && (
         <div className="fixed top-0 left-0 w-full h-full bg-gray-500 bg-opacity-50 flex justify-center items-center">
           <div className="bg-white rounded-lg p-8 ">
             <div className="flex items-top justify-top">
@@ -77,6 +78,7 @@ const RegistrationForm = () => {
             Register
           </Link>
         </div>
+        
         </div>
       </form>
    
