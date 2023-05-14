@@ -15,6 +15,7 @@
     "@mui/icons-material": "^5.11.11",
     "@mui/material": "^5.11.15",
     "@mui/styled-engine-sc": "^5.11.11",
+    "antd": "^5.4.7",
     "chart.js": "^2.9.4",
     "eslint": "8.37.0",
     "eslint-config-next": "13.2.4",

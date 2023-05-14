@@ -1,11 +1,23 @@
 import Image from "next/image";
 import Link from "next/link";
-import Headerprofail from "./Headerprofail"
-import {MenuIcon, SearchIcon, UserCircleIcon} from '@heroicons/react/solid'
-function Header() {
+import Headerprofail from "./Headerprofail";
+import {MenuIcon, SearchIcon, UserCircleIcon} from '@heroicons/react/solid';
+import { DownloadOutlined } from '@ant-design/icons';
+import { Button} from 'antd';
+import {useState} from "react";
+import type { SizeType } from 'antd/es/config-provider/SizeContext';
+
+function Header({setValued}) {
+  const [size, setSize] = useState<SizeType>('large'); // default is 'middle'
+ 
+  const [collapse,setCollapse]=useState(false);
+const handleValue = (value) => {
+  setCollapse()
+  setValued(collapse)
+}
   return (
     <>
-       <header className="sticky top-0 z-50 grid grid-cols-3 bg-blue-50 shadow-md py-3 px-3 md:px-6">
+       <header className="sticky top-0 z-50 grid grid-cols-3 bg-blue-50 shadow-md py-1 px-3 md:px-6">
         
         <div className="relative flex items-center h-10 cursor-pointer">
             
@@ -14,10 +26,11 @@ function Header() {
             //  layout="fill"
              objectFit="contain"
              objectPosition="left"
-             width={200}
+             width={150}
              height={100}
              />
              </Link>
+             <Button className="m-2" onClick= {() => handleValue(!collapse)} type="primary" icon={<DownloadOutlined   />} size={size} />
         </div>
  
         <div className="flex items-center md:border-0 rounded-full py-2 md:shadow-sm">
