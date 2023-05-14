@@ -4,12 +4,12 @@ import Register from '../pages/Register'
 function Banner() {
   return (
     <>
-       <div className="relative  h-[250px] sm:h-[300px] 
-    lg:h-[350px] xl:h-[400px] 2xl:h-[450px]">
+       <div className="relative  h-[250px] sm:h-[300px] lg:h-[350px] xl:h-[400px] 2xl:h-[450px]">
         <Image
         src="/banner.jpg"
         layout="fill"
         objectFit="cover"
+        alt="image"
         />
         
         <div className="absolute top-1/2 w-full mt-0  text-center  items-center  ">

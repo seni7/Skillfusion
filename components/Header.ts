@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import Headerprofail from "../components/Headerprofail"
+import Headerprofail from "./Headerprofail"
 import {MenuIcon, SearchIcon, UserCircleIcon} from '@heroicons/react/solid'
 function Header() {
   return (
