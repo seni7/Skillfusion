@@ -13,8 +13,8 @@ const Card = ({id,title,grade}) => {
 <Link className=" py-2 text-center m-2 bg-blue-50 shadow-lg rounded-full pointer-cursor font-bold  hover:shadow-x1 active:scale-90 translation duration-150" href="/Card">Upload Result</Link>
 <Link className=" py-2 text-center m-2 bg-blue-50 shadow-lg rounded-full pointer-cursor font-bold hover:shadow-x1 active:scale-90 translation duration-150" href="/Card">Videos</Link>
 <Link className=" py-2 text-center m-2 bg-blue-50 shadow-lg rounded-full pointer-cursor font-bold  hover:shadow-x1 active:scale-90 translation duration-150" href="/Card">Books</Link> */}
-{/* <Sidebar/> */}
 
+{/* <Sidebar/> */}
 </div>
      <div className="relative h-100  grid grid-cols-1 md:grid-cols-2 ml-60 p-5">
     <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-5xl my-1  border-double transition delay-700 duration-300 border-4 border-sky-200  hover:border-dotted border-2 border-sky-500 transition delay-700 duration-300">
