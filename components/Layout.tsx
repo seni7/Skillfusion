@@ -29,8 +29,8 @@ const [size, setSize] = useState<SizeType>('large'); // default is 'middle'
          <Layout className='h-screen'>
          
         
-          <Headers b={collapse,setCollapse}/>
             <Layout>
+          {/* <Headers collapse12={collapse12}/> */}
             <Sider width={200} trigger={null} collapsible collapsed={collapse}>
 
       <Menu
