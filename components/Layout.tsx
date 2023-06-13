@@ -3,14 +3,14 @@ import Headers from "./Header";
 import { DownloadOutlined } from '@ant-design/icons';
 import { Button} from 'antd';
 import { useState } from 'react';
-import {Layout,Menu} from 'antd';
-import {
-    MenuFoldOutlined,
-    MenuUnfoldOutlined,
+import {Layout,Menu} from 'antd'; 
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { 
     UploadOutlined,
     UserOutlined,
     VideoCameraOutlined,
-  } from '@ant-design/icons';
+  } from '@ant-design/icons'; 
 import type { SizeType } from 'antd/es/config-provider/SizeContext';
 
 
@@ -21,40 +21,39 @@ const [collapse,setCollapse]=useState(false);
 const {Content,Sider,Footer,Header} = Layout;
 
 const [size, setSize] = useState<SizeType>('large'); // default is 'middle'
+ 
+const router = useRouter();
 
+const handleMenuClick = (e) => {
+  router.push(e.key); // Navigate to the selected route
+};
 
     return ( 
-         <>
-         
+         <> 
          <Layout className='h-screen'>
          
         
+          <Header />
             <Layout>
-          {/* <Headers collapse12={collapse12}/> */}
             <Sider width={200} trigger={null} collapsible collapsed={collapse}>
 
-      <Menu
-              theme="dark"
-              mode="inline"
-              defaultSelectedKeys={['1']}
-              items={[
-                {
-                  key: '1',
-                  icon: <UserOutlined />,
-                  label: 'nav 1',
-                },
-                {
-                  key: '2',
-                  icon: <VideoCameraOutlined />,
-                  label: 'nav 2',
-                },
-                {
-                  key: '3',
-                  icon: <UploadOutlined />,
-                  label: 'nav 3',
-                },
-              ]}
-          />
+            <Menu onClick={ ()=>{}} selectedKeys={[router.pathname]} mode="vertical">
+            <Menu.Item key="/">
+              <Link href="/">Home</Link>
+            </Menu.Item>
+            <Menu.Item key="/">
+            <Link href="/auth/login">Login</Link> 
+            </Menu.Item>
+            <Menu.Item key="/">
+            <Link href="/auth/me">Profile</Link> 
+            </Menu.Item>
+            <Menu.Item key="/subjects">
+              <Link href="/subjects">Subjects</Link>
+            </Menu.Item>
+            <Menu.Item key="/contact">
+              <Link href="/contact">Contact</Link>
+            </Menu.Item>
+          </Menu> 
 
       </Sider>
             
