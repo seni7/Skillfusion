@@ -10,7 +10,7 @@ function Sidebar() {
     <div className="fixed top-18 left-0 h-screen  md:w-80 bg-[#2B7C6D] text-white z-50">
       <button
         className="p-4 focus:outline-none md:hidden"
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() =>  setIsOpen(!isOpen)}
       >
         <IoMdMenu size={24} />
       </button>
