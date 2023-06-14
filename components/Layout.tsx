@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import DashboardPage from './DashboardPage'
-import CoursePage from './CoursePage';
+// import DashboardPage from '../pages/DashboardPage'
+// import CoursePage from '../pages/CoursePage';
 import { Layout, Menu, Switch, Dropdown } from 'antd';
 import {
   DashboardOutlined,
@@ -50,7 +50,7 @@ const Discussions = () => <h1>Discussions Page</h1>;
 const { Header, Sider, Content } = Layout;
 const { SubMenu } = Menu;
 
-const Layouts = () => {
+const Layouts = ({children}) => {
   const [collapsed, setCollapsed] = useState(false);
   const [darkMode, setDarkMode] = useState(true);
   const [content, setContent] = useState('');
@@ -79,45 +79,6 @@ const Layouts = () => {
     </Menu>
   );
 
-  const renderContent = () => {
-    switch (content) {
-      case '1':
-        return <DashboardPage />;
-      case '2':
-        return <CoursePage />;
-      case '3':
-        return <Result />;
-      case '4':
-        return <Schedule />;
-      case '5':
-        return <Attendance />;
-      case '6':
-        return <Resources />;
-      case '7':
-        return <GradeOne />;
-      case '8':
-        return <GradeTwo />;
-      case '19':
-        return <Teacher />;
-      case '20':
-        return <Student />;
-      case '21':
-        return <Grades />;
-      case '22':
-        return <Account />;
-      case '23':
-        return <Settings />;
-      case '24':
-        return <Support />;
-      case '25':
-        return <Announcements />;
-      case '26':
-        return <Discussions />;
-      default:
-        return null;
-    }
-  };
-
   return (
     <Layout className={`h-screen ${darkMode ? 'dark' : ''}`}>
       <Sider
@@ -142,8 +103,8 @@ const Layouts = () => {
           
 
           <Menu.Item key="1" icon={<DashboardOutlined />}>
-  <Link legacyBehavior href="/DashboardPage" >
-    <a href="">Dashboard</a>
+  <Link href="/DashboardPage">
+    Dashboard
   </Link>
 </Menu.Item>
 
@@ -236,7 +197,7 @@ const Layouts = () => {
           </div>
         </Header>
         <Content className="p-6 overflow-y-auto bg-slate-300" style={{ margin: '24px 16px', padding: 24, minHeight: 280 }}>
-          {renderContent()}
+          {children}
         </Content>
       </Layout>
     </Layout>
