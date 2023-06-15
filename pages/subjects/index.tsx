@@ -1,22 +1,22 @@
 import { Table } from "antd";
 import type { ColumnsType } from "antd/es/table";
-import Layout from '../../components/Layout'
+import Layout from "../../components/Layout";
 import GustLayout from "../layout/gustLayout";
 import React, { useState, useEffect } from "react";
 import { makeAuthorizedRequest } from "../../utils/api";
 
 interface DataType {
-  key: React.Key; 
+  key: React.Key;
 
-am_name: string;
-am_short_code_name: string;
-name: string;
-created_at: string;
-description: string;
-id: string; 
-number_sub_center: string;
-types: string;
-updated_at: string;
+  am_name: string;
+  am_short_code_name: string;
+  name: string;
+  created_at: string;
+  description: string;
+  id: string;
+  number_sub_center: string;
+  types: string;
+  updated_at: string;
 }
 
 const columns: ColumnsType<DataType> = [
@@ -27,13 +27,13 @@ const columns: ColumnsType<DataType> = [
     key: "name",
     fixed: "left",
   },
- 
-//   { title: "am_name", dataIndex: "am_name", key: "1" },
-//   { title: "am_short_code_name", dataIndex: "am_short_code_name", key: "2" },
+
+  //   { title: "am_name", dataIndex: "am_name", key: "1" },
+  //   { title: "am_short_code_name", dataIndex: "am_short_code_name", key: "2" },
   { title: "Name", dataIndex: "name: string;", key: "3" },
   { title: "Date", dataIndex: "created_at", key: "4" },
   { title: "Description", dataIndex: "description", key: "5" },
-//   { title: "number_sub_center", dataIndex: "number_sub_center", key: "6" },
+  //   { title: "number_sub_center", dataIndex: "number_sub_center", key: "6" },
   { title: "Types", dataIndex: "types", key: "7" },
   { title: "Updated", dataIndex: "updated_at", key: "8" },
   {
@@ -54,18 +54,21 @@ const columns: ColumnsType<DataType> = [
 //   },
 //   {
 //     key: "2",
-//     name: "Jim Green", 
+//     name: "Jim Green",
 //     address: "London Park",
 //   },
 // ];
 
-const App  = () => {
+const App = () => {
   const [tableData, setTableData] = useState([]);
 
-  useEffect(  () => { 
+  useEffect(() => {
     const fetchData = async () => {
-        try {
-          const response = await makeAuthorizedRequest("mainCenters/search", "POST", {
+      try {
+        const response = await makeAuthorizedRequest(
+          "mainCenters/search",
+          "POST",
+          {
             include: "",
             limit: 10,
             page: 1,
@@ -79,26 +82,44 @@ const App  = () => {
                 direction: "desc",
               },
             ],
-          }); 
-          const result = await response.data;
-    // console.log(JSON.stringify(result))
-          setTableData(result);  
-        } catch (error) {
-          console.error(error);
-        }
-      };
-  
-      fetchData();
+          }
+        );
+        const result = await response.data;
+        // console.log(JSON.stringify(result))
+        setTableData(result);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchData();
   }, []);
 
+  // const createBank = async () => await fetch('http://localhost:8000/api/bank',{
+  //     method: 'POST',
+  //     headers: {
+  //      Accept : 'application/json',
+  //      authorization: 'bearer 8|V2HwhM6Hnbyso74tOEmnF2YOS07LRCy50sO7HKsn'
+  //     },
+  //     body: JSON.stringify({
+  //       bank_name:"CBE_Bank_abcdsdfsd ",
+  //       bank_account:"10002342342"
+  //   })
 
-return (
-  <>
-    {/* {JSON.stringify(tableData)} */}
-     <Layout>
+  const createBank = async () =>
+    await makeAuthorizedRequest("bank", "POST", {
+      bank_name: "CBE_Bank_abcdsdfsd ",
+      bank_account: "10002342342",
+    });
+
+  return (
+    <>
+      {/* {JSON.stringify(tableData)} */}
+      <Layout>
         <Table columns={columns} dataSource={tableData} scroll={{ x: 1300 }} />
-    </Layout>
-  </>
-);
+        <button onClick={createBank}>Create Bank</button>
+      </Layout>
+    </>
+  );
 };
 export default App;
