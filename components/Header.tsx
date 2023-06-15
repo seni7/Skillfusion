@@ -12,7 +12,7 @@ function Header({setValued}) {
  
   const [collapse,setCollapse]=useState(false);
 const handleValue = (value) => {
-  setCollapse()
+  // setCollapse()
   setValued(collapse)
 }
   return (
