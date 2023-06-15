@@ -44,11 +44,11 @@ const router = useRouter();
         // console.log('Bearer token:', token);
         localStorage.setItem('skillAuth', token);
         makeAuthorizedRequest('me').then((response) => {
-          localStorage.setItem('me', JSON.stringify(response));
+          localStorage.setItem('me', JSON.stringify(response.data));
 
           const {type}=response.data;
           if (type === 'admin'){
-            router.push('/dashboard');
+            router.push('/DashboardPage');
           }else if(type === 'student'){
             router.push('/student');
           } 
