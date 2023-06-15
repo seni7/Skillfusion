@@ -19,7 +19,8 @@ export const makeAuthorizedRequest = async (url: string, method: string = 'GET',
       const data = await response.json();
       return data;
     } else {
-      throw new Error('Request failed');
+     // throw new Error('Request failed');
+     console.error(`Request failed /${url} `,response);
     }
   };
   
