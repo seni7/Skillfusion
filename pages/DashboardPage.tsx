@@ -1,8 +1,10 @@
 import React from 'react'
+import Layouts from '../components/Layout';
 
 function DashboardPage() {
   return (
-    <div>Dashboard DISPLAYED</div>
+    <Layouts>
+    <div>Dashboard DISPLAYED</div></Layouts>
   )
 }
 
