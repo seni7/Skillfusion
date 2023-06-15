@@ -153,6 +153,13 @@ const Layouts = ({children}) => {
           </div>
 
           
+   
+          <Menu.Item key="studentRegister" icon={<ReadOutlined />}>
+          <Link legacyBehavior href="/student/register">
+    <a>student register</a>
+  </Link>
+          </Menu.Item>
+
           <Menu.Item key="2" icon={<ReadOutlined />}>
           <Link legacyBehavior href="/CoursePage">
     <a>Course</a>
