@@ -50,7 +50,7 @@ const Discussions = () => <h1>Discussions Page</h1>;
 const { Header, Sider, Content } = Layout;
 const { SubMenu } = Menu;
 
-const Layouts = () => {
+const Layouts = ({children}) => {
   const [collapsed, setCollapsed] = useState(false);
   const [darkMode, setDarkMode] = useState(true);
   const [content, setContent] = useState('');
@@ -236,7 +236,7 @@ const Layouts = () => {
           </div>
         </Header>
         <Content className="p-6 overflow-y-auto bg-slate-300" style={{ margin: '24px 16px', padding: 24, minHeight: 280 }}>
-          {renderContent()}
+          {children}
         </Content>
       </Layout>
     </Layout>
