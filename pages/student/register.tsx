@@ -1,9 +1,6 @@
-import { useState, FormEvent } from "react";
-import React, { Component } from "react";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import Image from "next/image";
-import GustLayout from "../layout/gustLayout";
+ 
+import React  from "react"; 
+import { useRouter } from "next/router"; 
 import {
   Layout,
   Button,
@@ -13,15 +10,8 @@ import {
   Form,
   Input,
   Switch,
-} from "antd";
-import signinbg from "../../public/download_.jpeg";
-import {
-  DribbbleOutlined,
-  TwitterOutlined,
-  InstagramOutlined,
-  GithubOutlined,
-  DownloadOutlined,
-} from "@ant-design/icons";
+} from "antd"; 
+ 
 import { makeAuthorizedRequest } from "../../utils/api";
 import Layouts from "../../components/Layout";
 // import { DownloadOutlined } from '@mui/icons-material';
@@ -58,10 +48,10 @@ const StudentRegister = () => {
         age: values["age"],
         lernning_mode: values["lernning_mode"],
       });
+
       if (response.ok) {
-        // Store the token in local storage or a state management solution
-        // console.log('Bearer token:', token);
-        router.push("/Student");
+        // Store the token in local storage or a state management solution 
+        router.push("/Student/list"); 
       } else {
         console.error("Login failed");
       }
@@ -77,13 +67,7 @@ const StudentRegister = () => {
   return (
     <>
       <Layouts>
-        {/* <Content className="signin"> */}
-        {/* <Row gutter={[0, 0]} justify="space-around"> */}
-        {/* <Col xs={{ span: 24, offset: 0 }} lg={{ span: 6, offset: 2 }} md={{ span: 12 }} > */}
         <Title className="mb-15">Student Register</Title>
-        {/* <Title className="font-regular text-muted" level={5}>
-                  Enter your username and password to sign in
-                </Title> */}
 
         <Form
           onFinish={onFinish}
