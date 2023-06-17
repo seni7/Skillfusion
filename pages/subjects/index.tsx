@@ -1,99 +1,118 @@
-import { Table } from "antd";
-import type { ColumnsType } from "antd/es/table";
-import Layout from "../../components/Layout";
-import GustLayout from "../layout/gustLayout";
-import React, { useState, useEffect } from "react";
-import { makeAuthorizedRequest } from "../../utils/api";
+import { useState, useEffect } from "react";
+import React , { useMemo } from "react"; 
+import { useRouter } from "next/router";  
+import {  Space ,Table} from 'antd'; 
 
-interface DataType {
-  key: React.Key; 
-  am_name: string;
-  am_short_code_name: string;
-  name: string;
-  created_at: string;
-  description: string;
-  id: string;
-  number_sub_center: string;
-  types: string;
-  updated_at: string;
-}
-
-const columns: ColumnsType<DataType> = [
-  {
-    title: "Full Name",
-    width: 100,
-    dataIndex: "name",
-    key: "name",
-    fixed: "left",
-  },
-
-  //   { title: "am_name", dataIndex: "am_name", key: "1" },
-  //   { title: "am_short_code_name", dataIndex: "am_short_code_name", key: "2" },
-  { title: "Name", dataIndex: "name: string;", key: "3" },
-  { title: "Date", dataIndex: "created_at", key: "4" },
-  { title: "Description", dataIndex: "description", key: "5" },
-  //   { title: "number_sub_center", dataIndex: "number_sub_center", key: "6" },
-  { title: "Types", dataIndex: "types", key: "7" },
-  { title: "Updated", dataIndex: "updated_at", key: "8" },
-  {
-    title: "Action",
-    key: "operation",
-    fixed: "right",
-    width: 100,
-    render: () => <a>action</a>,
-  },
-];
+import { Typography } from "antd";  
  
-const App = () => {
-  const [tableData, setTableData] = useState([]);
+import { makeAuthorizedRequest } from "../../utils/api";
+import Layouts from "../../components/Layout"; 
+import Link from "next/link";
+ 
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await makeAuthorizedRequest(
-          "mainCenters/search",
-          "POST",
-          {
-            include: "",
-            limit: 10,
-            page: 1,
-            filters: [],
-            search: {
-              value: "",
-            },
-            sort: [
-              {
-                field: "created_at",
-                direction: "desc",
-              },
-            ],
-          }
-        );
-        const result = await response.data; 
-        setTableData(result);
-      } catch (error) {
-        console.error(error);
-      }
-    };
+const CourseList = () => {
+    const [courseTableList,setCourseTableList]=useState([]); 
+ 
 
-    fetchData();
-  }, []);
+  const { Title } = Typography;
 
-   
-  const createBank = async () =>
-    await makeAuthorizedRequest("bank", "POST", {
-      bank_name: "CBE_Bank_abcdsdfsd ",
-      bank_account: "10002342342",
-    });
+  const router = useRouter();
+  const columns = [
+    {
+      title: 'Subject Name',
+      dataIndex: 'course_names',
+      key: 'course_names',
+  
+    },
+    {
+      title: 'Subject Codes',
+      dataIndex: 'course_codes',
+      key: 'course_codes',
+     
+      
+    },
+    {
+      title: 'Assessment Weights',
+      dataIndex: 'assessment_weights',
+      key: 'assessment_weights', 
+    },
+    {
+      title: 'Assessment Pass Mark',
+      dataIndex: 'assessment_weights',
+      key: 'assessment_pass_mark',
+    
+      
+    },
+    {
+      title: 'Subject Completion Criteria',
+      dataIndex: 'course_completion_criteria',
+      key: 'course_completion_criteria',
+     
+      
+    },
+  
+    {
+        title: 'Action',
+        key: 'action',
+        render: (_, record) => (
+          <Space size="middle"> 
+            <a onClick={()=>router.push(`/subjects/${record.id}/info`)}>Info</a> 
+            <a onClick={()=>router.push(`/subjects/${record.id}/update`)}>Update</a> 
+            <a onClick={()=>deleteList(`course/${record.id}`)}>Delete</a> 
+          </Space>
+        ),
+      },
+  ];
+
+ const  deleteList = async (courseId) => {
+    const response = await makeAuthorizedRequest(courseId, "DELETE", {});
+    onFinish()
+ } ;
+  
+  const onFinish = async () => {
+    try {
+      const response = await makeAuthorizedRequest("course/search", "POST", {});
+  
+      const result = await response.data; 
+      setCourseTableList(result); 
+      console.log(courseTableList)
+    } catch (error) {
+        
+      console.error("An error occurred", error);
+    }
+
+    
+
+  };
+
+  const onFinishFailed = (errorInfo) => {
+    console.log("Failed:", errorInfo);
+  };
+
+  const contextValue = useMemo(() => ({ name: 'Ant Design' }), []);
+ 
+  
+  useEffect(()=>{
+    onFinish();  
+  },[])
 
   return (
     <>
-      {/* {JSON.stringify(tableData)} */}
-      <Layout>
-        <Table columns={columns} dataSource={tableData} scroll={{ x: 1300 }} />
-        <button onClick={createBank}>Create Bank</button>
-      </Layout>
+      <Layouts> 
+         <Title  className="mb-15">Subjects List</Title>
+
+         <div className="flex justify-end">
+  <Link href="/subjects/register" className="m-7 px-5 py-2 rounded-md border font-bold">+ Add Subjects</Link>
+</div>
+
+
+<Table dataSource={courseTableList} columns={columns} />
+       
+      </Layouts>
     </>
   );
 };
-export default App;
+
+ 
+ 
+export default CourseList;
