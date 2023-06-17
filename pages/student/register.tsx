@@ -1,15 +1,13 @@
  
 import React  from "react"; 
+import {useEffect, useState}  from "react"; 
 import { useRouter } from "next/router"; 
 import {
-  Layout,
-  Button,
-  Row,
-  Col,
+  Select,
+  Button, 
   Typography,
   Form,
-  Input,
-  Switch,
+  Input, 
 } from "antd"; 
  
 import { makeAuthorizedRequest } from "../../utils/api";
@@ -36,17 +34,18 @@ const StudentRegister = () => {
         city: values["city"],
         email: values["email"],
         current_religion: values["current_religion"],
-        name_of_Chirstianity: values["name_of_Chirstianity"],
-        name_of_Chirstianity_fn: values["name_of_Chirstianity_fn"],
-        name_of_cherch_member: values["name_of_cherch_member"],
-        service_sub_center: values["service_sub_center"],
-        your_services: values["your_services"],
-        other_service: values["other_service"],
         main_centers_id: values["main_centers_id"],
         sub_centers_id: values["sub_centers_id"],
         curricula_id: values["curricula_id"],
-        age: values["age"],
-        lernning_mode: values["lernning_mode"],
+        age: values["age"], 
+        name_of_Chirstianity_fn: "name  " ,
+        name_of_cherch_member: "name member" , 
+        name_of_Chirstianity:  "name  ",
+        your_services: 'services', 
+        service_sub_center:'of service',
+        our_services :'our services',
+        other_service:'other services',
+        lernning_mode:'on Site',
       });
 
       if (response.ok) {
@@ -63,6 +62,60 @@ const StudentRegister = () => {
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
+
+
+
+  /**  options for fill forms from networks */
+  const [schools, setSchools] = useState([]);
+  const [branchs, setBranchs] = useState([]);
+  const [curriculums, setCurriculums] = useState([]);
+  const [selectedSchool, setSelectedSchool] = useState<Number>();
+
+
+  const fetchSchools = async () => {
+    try {
+      const response = await makeAuthorizedRequest('mainCenters/search',"POST");
+      const data = response.data;
+      setSchools(data); 
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  
+  const fetchCurriculums = async () => {
+    try {
+      const response = await makeAuthorizedRequest('curriculum/search',"POST");
+      const data = response.data;
+      setCurriculums(data); 
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const fetchBranch = async (selectedSchool) => {
+    try {
+      const response = await makeAuthorizedRequest('subCenters/search',"POST",{filters:[{ field: "main_center_id", operator: "=", value: selectedSchool }]});
+      const data = response.data;
+      setBranchs(data); 
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const schoolOnChange = (value) =>{
+    setSelectedSchool(value);
+  }
+
+  useEffect(() => {
+    fetchBranch(selectedSchool);
+  }, [selectedSchool]);
+
+  useEffect(() => {
+    fetchSchools();
+    fetchCurriculums();
+  }, []);
+  
+  /**  options for fill forms from networks */
 
   return (
     <>
@@ -152,33 +205,39 @@ const StudentRegister = () => {
                 },
               ]}
             >
-              <Input placeholder="Gender" />
+              <Select >
+                  {['Male','Female'].map((gender) => (
+                    <Select.Option key={gender} value={gender}  >
+                      {gender}
+                    </Select.Option>
+                  ))}
+              </Select>
             </Form.Item> 
             <Form.Item
               className=" "
-              label="phone_number"
+              label="Phone Number"
               name="phone_number"
               rules={[
                 {
                   required: true,
-                  message: "Please input your phone_number!",
+                  message: "Please input your Phone Number!",
                 },
               ]}
             >
-              <Input placeholder="phone_number" />
+              <Input placeholder="Phone Number" />
             </Form.Item>
             <Form.Item
               className=" "
-              label="date_of_birth"
+              label="Date of Birth"
               name="date_of_birth"
               rules={[
                 {
                   required: true,
-                  message: "Please input your date_of_birth!",
+                  message: "Please input your Date of Birth!",
                 },
               ]}
             >
-              <Input placeholder="date_of_birth" />
+              <Input placeholder="Date of Birth" />
             </Form.Item>
             <Form.Item
               className=" "
@@ -206,61 +265,10 @@ const StudentRegister = () => {
             >
               <Input placeholder="email" />
             </Form.Item>
+            
             <Form.Item
               className=" "
-              label="email"
-              name="email"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input your email!",
-                },
-              ]}
-            >
-              <Input placeholder="email" />
-            </Form.Item>
-            <Form.Item
-              className=" "
-              label="service_sub_center"
-              name="service_sub_center"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input your service_sub_center!",
-                },
-              ]}
-            >
-              <Input placeholder="service_sub_center" />
-            </Form.Item> 
-            <Form.Item
-              className=" "
-              label="your_services"
-              name="your_services"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input your your_services!",
-                },
-              ]}
-            >
-              <Input placeholder="your_services" />
-            </Form.Item> 
-            <Form.Item
-              className=" "
-              label="other_service"
-              name="other_service"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input your other_service!",
-                },
-              ]}
-            >
-              <Input placeholder="other_service" />
-            </Form.Item> 
-            <Form.Item
-              className=" "
-              label="main_centers_id"
+              label="School Name"
               name="main_centers_id"
               rules={[
                 {
@@ -268,8 +276,14 @@ const StudentRegister = () => {
                   message: "Please input your main_centers_id!",
                 },
               ]}
-            >
-              <Input placeholder="main_centers_id" />
+            > 
+              <Select placeholder="School Name" onChange={schoolOnChange}>
+                  {schools.map((school) => (
+                    <Select.Option key={school.value} value={school.id}  >
+                      {school.name}
+                    </Select.Option>
+                  ))}
+              </Select>
             </Form.Item> 
             <Form.Item
               className=" "
@@ -286,55 +300,56 @@ const StudentRegister = () => {
             </Form.Item> 
             <Form.Item
               className=" "
-              label="sub_centers_id"
+              label="School Branch's"
               name="sub_centers_id"
               rules={[
                 {
                   required: true,
-                  message: "Please input your sub_centers_id!",
+                  message: "Please input your School Branch Name!",
                 },
               ]}
-            >
-              <Input placeholder="sub_centers_id" />
+            > 
+              <Select placeholder="School Branch's" >
+                  {branchs.map((branch) => (
+                    <Select.Option key={branch.value} value={branch.id}  >
+                      {branch.name}
+                    </Select.Option>
+                  ))}
+              </Select>
             </Form.Item>
+        
             <Form.Item
               className=" "
-              label="lernning_mode"
-              name="lernning_mode"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input your lernning_mode!",
-                },
-              ]}
-            >
-              <Input placeholder="lernning_mode" />
-            </Form.Item>
-            <Form.Item
-              className=" "
-              label="country_of_residence"
+              label="Country"
               name="country_of_residence"
               rules={[
                 {
                   required: true,
-                  message: "Please input your country_of_residence!",
+                  message: "Please input your Country!",
                 },
               ]}
             >
-              <Input placeholder="country_of_residence" />
+              <Input placeholder="Country" />
             </Form.Item> 
+
             <Form.Item
               className=" "
-              label="curricula_id"
+              label="Curricula"
               name="curricula_id"
               rules={[
                 {
                   required: true,
-                  message: "Please input your curricula_id!",
+                  message: "Please input your Curricula!",
                 },
               ]}
-            >
-              <Input placeholder="curricula_id" />
+            > 
+              <Select  placeholder="Curricula" >
+                  {curriculums.map((curricula) => (
+                    <Select.Option key={curricula.value} value={curricula.id}  >
+                      {curricula.name_en}
+                    </Select.Option>
+                  ))}
+              </Select>
             </Form.Item>
           </div>
           <div className="flex space-x-3 justify-end">
@@ -344,9 +359,10 @@ const StudentRegister = () => {
                 htmlType="submit"
                 style={{ width: "100%", backgroundColor: "blue" }}
               >
-                StudentRegister
+                Student Register
               </Button>
             </Form.Item>
+            
             <Form.Item>
               <Button
                 type="primary"
@@ -354,6 +370,7 @@ const StudentRegister = () => {
                 style={{ width: "100%", backgroundColor: "blue" }}
               >
                 Close
+
               </Button>
             </Form.Item>
           </div>

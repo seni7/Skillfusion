@@ -239,6 +239,12 @@ const Layouts = ({ children }) => {
             </Link>
           </Menu.Item>
 
+          <Menu.Item key="branch" icon={<ReadOutlined />}>
+            <Link legacyBehavior href="/branch">
+              <a>Branch</a>
+            </Link>
+          </Menu.Item>
+
           <SubMenu key="users" icon={<UserOutlined />} title="Users">
             <Menu.Item key="staffs">Staffs</Menu.Item>
             <Menu.Item key="student"> 
@@ -246,17 +252,16 @@ const Layouts = ({ children }) => {
               <a>student</a>
             </Link></Menu.Item>
           </SubMenu>
-
-
-          <Menu.Item key="branch" icon={<ReadOutlined />}>
-            <Link legacyBehavior href="/branch">
-              <a>Branch</a>
-            </Link>
-          </Menu.Item>
-
+ 
           <Menu.Item key="subjects" icon={<ReadOutlined />}>
             <Link legacyBehavior href="/subjects">
               <a>Subjects</a>
+            </Link>
+          </Menu.Item>
+
+          <Menu.Item key="curricula" icon={<ReadOutlined />}>
+            <Link legacyBehavior href="/curricula">
+              <a>Curricula</a>
             </Link>
           </Menu.Item>
   

@@ -53,7 +53,7 @@ const CourseList = () => {
       
     },
     {
-      title: 'School Amahric Name ',
+      title: 'Country ',
       dataIndex: 'am_name',
       key: 'am_name',
       render: (_, record) => (
@@ -63,17 +63,7 @@ const CourseList = () => {
       ),
       
     },
-    {
-      title: 'Amharic Short Name',
-      dataIndex: 'am_short_code_name',
-      key: 'am_short_code_name',
-      render: (_, record) => (
-        <Space size="middle">
-          <a onClick={()=>router.push(`/mainCenters/${record.id}/info`)}>{record.am_short_code_name}</a> 
-        </Space>
-      ),
-      
-    },
+  
     {
       title: 'Description',
       dataIndex: 'description',
@@ -157,17 +147,11 @@ const CourseList = () => {
 
   return (
     <>
-      <Layouts>
-         <Context.Provider value={contextValue}>
-            {contextHolder} 
-            </Context.Provider>
-         <Title  className="mb-15">School List</Title>
-
-
-         <div className="flex justify-end">
-  <Link href="/schools/schools" className="m-7 px-5 py-2 rounded-md border font-bold">Add New School</Link>
-</div>
-
+      <Layouts> 
+         <div className="flex justify-between">
+         <Title  className="mb-15">School List</Title>  
+          <Link href="/schools/register" className="m-7 px-5 py-2 rounded-md border font-bold">Add New School</Link>
+        </div> 
 <Table dataSource={schoolTableList} columns={columns} />
        
       </Layouts>

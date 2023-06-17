@@ -1,25 +1,25 @@
- 
-import React  from "react"; 
+ import React  from "react"; 
+ import {useState ,useEffect}  from "react"; 
 import { useRouter } from "next/router"; 
-import { 
-  Button, 
-  Typography,
-  Form,
-  Input,
-  Select
-} from "antd"; 
+import { Typography, Skeleton, Input , Form ,Button} from 'antd';
  
-import { makeAuthorizedRequest } from "../../utils/api";
-import Layouts from "../../components/Layout"; 
-import { useState, useEffect } from 'react';
+import { makeAuthorizedRequest } from "../../../utils/api";
+import Layouts from "../../../components/Layout"; 
 
-const registerClassRoom = () => {
-  const { Title } = Typography;
+const ClassRoomUpdate = () => {
+
   const router = useRouter();
+  const { id } = router.query;
+  const [initFormValue,setInitFormValue] = useState({})
+  const [loading , setLoading] = useState(true)
+
+
+useEffect(() => {onInit()},[])
+ 
+  const { Title } = Typography; 
   const onFinish = async (values) => {
     try {
-      const response = await makeAuthorizedRequest("session", "POST", {
-        
+      const response = await makeAuthorizedRequest(`session/${1}`, "PATCH", { 
         mcenters_id:values['mcenters_id'], 
         scenters_id:values['scenters_id'], 
         c_id:values['c_id'], 
@@ -29,9 +29,9 @@ const registerClassRoom = () => {
         party:[]
       });
 
-      if (response.ok) {
-        // Store the token in local storage or a state management solution 
-        router.push("/Student/list"); 
+      if (response.data) {
+        
+        router.push("/classRoom"); 
       } else {
         console.error("Login failed");
       }
@@ -39,76 +39,36 @@ const registerClassRoom = () => {
       console.error("An error occurred", error);
     }
   };
+  const onInit = async () => { 
+      const response = await makeAuthorizedRequest(`session/${id}`, "GET");
+
+      if (response.data) { 
+        setLoading(false)
+        setInitFormValue(response.data); 
+      } else {
+        console.error("Login failed");
+      }
+ 
+      setLoading(false) 
+    }
+ 
 
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
-  const [loading, setLoading] = useState(true);
-
-  const [schools, setSchools] = useState([]);
-  const [branchs, setBranchs] = useState([]);
-  const [curriculums, setCurriculums] = useState([]);
-  const [selectedSchool, setSelectedSchool] = useState<Number>();
-
-
-  const fetchSchools = async () => {
-    try {
-      const response = await makeAuthorizedRequest('mainCenters/search',"POST");
-      const data = response.data;
-      setSchools(data);
-      setLoading(false);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  
-  const fetchCurriculums = async () => {
-    try {
-      const response = await makeAuthorizedRequest('curriculum/search',"POST");
-      const data = response.data;
-      setCurriculums(data);
-      setLoading(false);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const fetchBranch = async (selectedSchool) => {
-    try {
-      const response = await makeAuthorizedRequest('subCenters/search',"POST",{filters:[{ field: "main_center_id", operator: "=", value: selectedSchool }]});
-      const data = response.data;
-      setBranchs(data);
-      setLoading(false);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const schoolOnChange = (value) =>{
-    setSelectedSchool(value);
-  }
-
-  useEffect(() => {
-    fetchBranch(selectedSchool);
-  }, [selectedSchool]);
-
-  useEffect(() => {
-    fetchSchools();
-    fetchCurriculums();
-  }, []);
-  
 
   return (
     <>
       <Layouts>
-        <Title className="mb-15">ClassRoom Register</Title>
-
-        <Form
+        
+        <Title className="mb-15">ClassRoom Update Information</Title>
+      {loading ?  <Skeleton/>  :  
+          <Form
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
+          initialValues={initFormValue}
           layout="vertical"
-          className="row-col "
-        >
+          className="row-col "  >
           <div className="space-x-2 grid grid-cols-3">
             <Form.Item
               className=""
@@ -147,15 +107,7 @@ const registerClassRoom = () => {
                 },
               ]}
             >
-              
-              <Select onChange={schoolOnChange}>
-                  {schools.map((school) => (
-                    <Select.Option key={school.value} value={school.id}  >
-                      {school.name}
-                    </Select.Option>
-                  ))}
-              </Select>
-              
+              <Input placeholder="School" />
             </Form.Item>
             <Form.Item
               className=" "
@@ -168,13 +120,7 @@ const registerClassRoom = () => {
                 },
               ]}
             >
-              <Select  >
-                  {branchs.map((branch) => (
-                    <Select.Option key={branch.value} value={branch.id}  >
-                      {branch.name}
-                    </Select.Option>
-                  ))}
-              </Select>
+              <Input placeholder="Branch" />
             </Form.Item>
             <Form.Item
               className=" "
@@ -187,13 +133,7 @@ const registerClassRoom = () => {
                 },
               ]}
             >
-               <Select >
-                  {curriculums.map((curricula) => (
-                    <Select.Option key={curricula.value} value={curricula.id}  >
-                      {curricula.name_en}
-                    </Select.Option>
-                  ))}
-              </Select>
+              <Input placeholder="Curriculum" />
             </Form.Item>
             <Form.Item
               className=" "
@@ -219,7 +159,7 @@ const registerClassRoom = () => {
                 htmlType="submit"
                 style={{ width: "100%", backgroundColor: "blue" }}
               >
-              Register ClassRoom
+              Update ClassRoom
               </Button>
             </Form.Item>
             <Form.Item>
@@ -227,15 +167,18 @@ const registerClassRoom = () => {
                 type="primary"
                 htmlType="submit"
                 style={{ width: "100%", backgroundColor: "blue" }}
+
               >
                 Close
               </Button>
             </Form.Item>
           </div>
         </Form> 
+         }
+  
       </Layouts>
     </>
-  );
+  ); 
 };
 
-export default registerClassRoom;
+export default ClassRoomUpdate;
