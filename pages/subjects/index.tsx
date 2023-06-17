@@ -6,8 +6,7 @@ import React, { useState, useEffect } from "react";
 import { makeAuthorizedRequest } from "../../utils/api";
 
 interface DataType {
-  key: React.Key;
-
+  key: React.Key; 
   am_name: string;
   am_short_code_name: string;
   name: string;
@@ -44,21 +43,7 @@ const columns: ColumnsType<DataType> = [
     render: () => <a>action</a>,
   },
 ];
-
-// const data: DataType[] = [
-//   {
-//     key: "1",
-//     name: "John Brown",
-//     age: 32,
-//     address: "New York Park",
-//   },
-//   {
-//     key: "2",
-//     name: "Jim Green",
-//     address: "London Park",
-//   },
-// ];
-
+ 
 const App = () => {
   const [tableData, setTableData] = useState([]);
 
@@ -84,8 +69,7 @@ const App = () => {
             ],
           }
         );
-        const result = await response.data;
-        // console.log(JSON.stringify(result))
+        const result = await response.data; 
         setTableData(result);
       } catch (error) {
         console.error(error);
@@ -95,17 +79,7 @@ const App = () => {
     fetchData();
   }, []);
 
-  // const createBank = async () => await fetch('http://localhost:8000/api/bank',{
-  //     method: 'POST',
-  //     headers: {
-  //      Accept : 'application/json',
-  //      authorization: 'bearer 8|V2HwhM6Hnbyso74tOEmnF2YOS07LRCy50sO7HKsn'
-  //     },
-  //     body: JSON.stringify({
-  //       bank_name:"CBE_Bank_abcdsdfsd ",
-  //       bank_account:"10002342342"
-  //   })
-
+   
   const createBank = async () =>
     await makeAuthorizedRequest("bank", "POST", {
       bank_name: "CBE_Bank_abcdsdfsd ",

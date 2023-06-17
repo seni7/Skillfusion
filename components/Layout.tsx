@@ -232,6 +232,13 @@ const Layouts = ({ children }) => {
           >
             <hr className="divider-line h-px opacity-50" />
           </div>
+
+          <Menu.Item key="schools" icon={<ReadOutlined />}>
+            <Link legacyBehavior href="/schools">
+              <a>Schools</a>
+            </Link>
+          </Menu.Item>
+
           <SubMenu key="users" icon={<UserOutlined />} title="Users">
             <Menu.Item key="staffs">Staffs</Menu.Item>
             <Menu.Item key="student"> 
@@ -240,11 +247,6 @@ const Layouts = ({ children }) => {
             </Link></Menu.Item>
           </SubMenu>
 
-          <Menu.Item key="schools" icon={<ReadOutlined />}>
-            <Link legacyBehavior href="/schools">
-              <a>Schools</a>
-            </Link>
-          </Menu.Item>
 
           <Menu.Item key="branch" icon={<ReadOutlined />}>
             <Link legacyBehavior href="/branch">
@@ -257,7 +259,7 @@ const Layouts = ({ children }) => {
               <a>Subjects</a>
             </Link>
           </Menu.Item>
-
+  
           <Menu.Item key="classRoom" icon={<ReadOutlined />}>
             <Link legacyBehavior href="/classRoom">
               <a>Class Rooms</a>
@@ -267,8 +269,10 @@ const Layouts = ({ children }) => {
           <Menu.Item key="3" icon={<ProfileOutlined />}>
             Result
           </Menu.Item>
-          <Menu.Item key="4" icon={<ScheduleOutlined />}>
-            Schedule
+            <Menu.Item key="acadamicyear" icon={<ReadOutlined />}>
+            <Link legacyBehavior href="/acadamicyear">
+            <a>Acadamic Year</a>
+          </Link>
           </Menu.Item>
           <Menu.Item key="5" icon={<CalendarOutlined />}>
             Attendance
@@ -290,8 +294,8 @@ const Layouts = ({ children }) => {
             <Menu.Item key="17">Eleven</Menu.Item>
             <Menu.Item key="18">Twelve</Menu.Item>
           </SubMenu>
-      
-
+           
+          
           <Menu.Item key="22" icon={<UsergroupAddOutlined />}>
             Account
           </Menu.Item>

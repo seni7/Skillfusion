@@ -9,7 +9,7 @@ export const makeAuthorizedRequest = async (url: string, method: string = 'GET',
       headers['Authorization'] = `Bearer ${token}`;
     }
   
-      const response = await fetch('http://127.0.0.1:8000/api/'+url, {
+      const response = await fetch('http://192.168.41.1:8000/api/'+url, {
       method,
       headers,
       body: body ? JSON.stringify(body) : undefined,
