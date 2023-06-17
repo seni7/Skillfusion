@@ -29,8 +29,8 @@ const CourseRegister = () => {
         assessment_weights: values["assessment_weights"],
         assessment_pass_mark: values["assessment_pass_mark"],
         course_completion_criteria: values["course_completion_criteria"],
-        payment_amount_birr: values["payment_amount_birr"],
-        payment_amount_usd: values["payment_amount_usd"],
+        payment_amount_birr: 0,
+        payment_amount_usd: 0,
       
       });
 
@@ -115,7 +115,7 @@ const CourseRegister = () => {
             </Form.Item>
             <Form.Item
               className=" "
-              label="Course Completion Criteria"
+              label="Subject Completion Criteria"
               name="course_completion_criteria"
               rules={[
                 {
@@ -124,34 +124,9 @@ const CourseRegister = () => {
                 },
               ]}
             >
-              <Input placeholder="Course Completion Criteria" />
+              <Input placeholder="Subject Completion Criteria" />
             </Form.Item> 
-            <Form.Item
-              className=" "
-              label="Payment Amount Birr"
-              name="payment_amount_birr"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input Payment Amount Birr!",
-                },
-              ]}
-            >
-              <Input placeholder="Payment Amount Birr" />
-            </Form.Item> 
-            <Form.Item
-              className=" "
-              label="Payment Amount Usd"
-              name="payment_amount_usd"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input your Payment Amount Usd!",
-                },
-              ]}
-            >
-              <Input placeholder="Payment Amount Usd" />
-            </Form.Item>
+
 
             <Form.Item>
               <Button

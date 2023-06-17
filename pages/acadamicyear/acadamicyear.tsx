@@ -108,9 +108,9 @@ const CourseRegister = () => {
               </Button>
             </Form.Item>
             <Form.Item>
-              <Button
+            <Button onClick={()=>router.push('/acadamicyear/')}
                 type="primary"
-                htmlType="submit"
+              
                 style={{ marginTop:100, width: "100%", backgroundColor: "blue" }}
               >
                 Close

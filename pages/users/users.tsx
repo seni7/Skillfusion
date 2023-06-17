@@ -397,7 +397,7 @@ const UserRegister = () => {
       <Button
         type="primary"
         htmlType="submit"
-        style={{ width: "100%", backgroundColor: "blue" }}
+        style={{ marginTop:10, width: "100%", backgroundColor: "blue" }}
       >
        Register
       </Button>
@@ -406,7 +406,7 @@ const UserRegister = () => {
     <Button onClick={()=>router.push('/users/')}
                 type="primary"
               
-                style={{ marginTop:100, width: "100%", backgroundColor: "blue" }}
+                style={{ marginTop:10, width: "100%", backgroundColor: "blue" }}
               >
                 Close
               </Button>

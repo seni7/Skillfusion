@@ -53,18 +53,18 @@ const CourseList = () => {
       
     },
     {
-      title: 'Courses_id',
+      title: 'Subject',
       dataIndex: 'courses_id',
       key: 'courses_id',
       render: (_, record) => (
         <Space size="middle">
-          <a onClick={()=>router.push(`/course_assessment/${record.id}/info`)}>{record.course_names}</a> 
+          <a onClick={()=>router.push(`/course_assessment/${record.id}/info`)}>{record.courses_id}</a> 
         </Space>
       ),
       
     },
     {
-      title: 'Session_id',
+      title: 'ClassRoom',
       dataIndex: 'session_id',
       key: 'session_id',
       render: (_, record) => (
@@ -75,7 +75,7 @@ const CourseList = () => {
       
     },
     {
-      title: 'Assessment Types_id',
+      title: 'Assessment Types',
       dataIndex: 'assessment_types_id',
       key: 'assessment_types_id',
       render: (_, record) => (
@@ -204,7 +204,7 @@ const CourseList = () => {
          <Context.Provider value={contextValue}>
             {contextHolder} 
             </Context.Provider>
-         <Title  className="mb-15">Course List</Title>
+         <Title  className="mb-15">Assesment List</Title>
 
          <div className="flex justify-end">
   <Link href="/result/result" className="m-7 px-5 py-2 rounded-md border font-bold">+ Add Assesment</Link>

@@ -4,10 +4,7 @@ import { useRouter } from "next/router";
 import type { NotificationPlacement } from 'antd/es/notification/interface';
 import { Button, Divider, Space, notification ,Table} from 'antd'; 
 
-import { Typography } from "antd"; 
-// import { 
-//     RadiusUprightOutlined,
-//   } from '@ant-design/icons';
+import { Typography } from "antd";  
  
 import { makeAuthorizedRequest } from "../../utils/api";
 import Layouts from "../../components/Layout"; 

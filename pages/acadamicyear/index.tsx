@@ -41,17 +41,7 @@ const CourseList = () => {
 
   const router = useRouter();
   const columns = [
-    {
-      title: 'School Name',
-      dataIndex: 'name',
-      key: 'name',
-      render: (_, record) => (
-        <Space size="middle">
-          <a onClick={()=>router.push(`/acadamic_year/${record.id}/info`)}>{record.name}</a> 
-        </Space>
-      ),
-      
-    },
+
     {
       title: 'Acadamic Year ',
       dataIndex: '',
@@ -69,7 +59,7 @@ const CourseList = () => {
       key: 'start_date',
       render: (_, record) => (
         <Space size="middle">
-          <a onClick={()=>router.push(`/acadamic_year/${record.id}/info`)}>{record.am_short_code_name}</a> 
+          <a onClick={()=>router.push(`/acadamic_year/${record.id}/info`)}>{record.start_date}</a> 
         </Space>
       ),
       
@@ -80,7 +70,7 @@ const CourseList = () => {
       key: 'end_date',
       render: (_, record) => (
         <Space size="middle">
-          <a onClick={()=>router.push(`/acadamic_year/${record.id}/info`)}>{record.description}</a> 
+          <a onClick={()=>router.push(`/acadamic_year/${record.id}/info`)}>{record.end_date}</a> 
         </Space>
       ),
       
@@ -106,7 +96,7 @@ const CourseList = () => {
   
   const onFinish = async () => {
     try {
-      const response = await makeAuthorizedRequest("mainCenters/search", "POST", {});
+      const response = await makeAuthorizedRequest("acadamic_year/search", "POST", {});
  
       openNotification({
         message:'failed to list',
@@ -165,7 +155,7 @@ const CourseList = () => {
 
 
          <div className="flex justify-end">
-  <Link href="/users/users" className="mb-5 px-5 py-2 rounded-md border font-bold">Add Acadamic Year</Link>
+  <Link href="/acadamicyear/acadamicyear" className="mb-5 px-5 py-2 rounded-md border font-bold">Add Acadamic Year</Link>
 </div>
 
 <Table dataSource={acadamicYearTableList} columns={columns} />

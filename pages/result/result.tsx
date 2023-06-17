@@ -1,6 +1,8 @@
  
-import React  from "react"; 
+import React, { useEffect }  from "react"; 
 import { useRouter } from "next/router"; 
+import { useState } from "react";
+
 import {
   Layout,
   Button,
@@ -10,6 +12,7 @@ import {
   Form,
   Input,
   Switch,
+  Select,
 } from "antd"; 
  
 import { makeAuthorizedRequest } from "../../utils/api";
@@ -20,6 +23,22 @@ import Link from "next/link";
 const CourseRegister = () => {
   const { Title } = Typography;
   const router = useRouter();
+  const [subjectOptions,setSubjectOption]=useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const fetchOptions = async () => {
+    try {
+      const response = await makeAuthorizedRequest('course/search',"POST", );
+      const data = response.data;
+      setSubjectOption(data);
+      setLoading(false);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  useEffect(() => {
+    fetchOptions();
+  }, []);
   const onFinish = async (values) => {
     try {
       const response = await makeAuthorizedRequest("course_assessment", "POST", {
@@ -53,7 +72,7 @@ const CourseRegister = () => {
   return (
     <>
       <Layouts>
-        <Title className="mb-15">Register Subject</Title>
+        <Title className="mb-15">Register Assesment</Title>
 
         <Form
           onFinish={onFinish}
@@ -75,9 +94,9 @@ const CourseRegister = () => {
             >
               <Input placeholder="Assesment Name" />
             </Form.Item> 
-            <Form.Item
+            {/* <Form.Item
               className=""
-              label="Courses Id"
+              label="Subject"
               name="courses_id"
               rules={[
                 {
@@ -86,10 +105,29 @@ const CourseRegister = () => {
                 },
               ]}
             >
-              <Input placeholder="Courses Id" />
-            </Form.Item>
+              <Input placeholder="Subject" />
+            </Form.Item> */}
+                  <Form.Item
+        label="Dropdown"
+        name="dropdown"
+        rules={[{ required: true, message: 'Please select an option' }]}
+      >
+        <Select>
+          {subjectOptions.map((SubjectOption) => (
+            <Select.Option key={SubjectOption.value} value={SubjectOption.id}>
+              {SubjectOption.course_names}
+            </Select.Option>
+          ))}
+        </Select>
+      </Form.Item>
+
+      <Form.Item>
+        <Button type="primary" htmlType="submit">
+          Submit
+        </Button>
+      </Form.Item>
             <Form.Item
-              className=" "
+              className=""
               label="Assessment types_id"
               name="assessment_types_id"
               rules={[
@@ -155,6 +193,15 @@ const CourseRegister = () => {
             </Form.Item>
 
             
+            <Form.Item>
+              <Button
+                type="primary"
+                htmlType="submit"
+                style={{ marginTop:100, width: "100%", backgroundColor: "blue" }}
+              >
+                Submit 
+              </Button>
+            </Form.Item>
             <Form.Item>
               <Button onClick={()=>router.push('/result/')}
                 type="primary"
