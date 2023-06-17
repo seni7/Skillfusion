@@ -38,7 +38,7 @@ const CourseList = () => {
     },
     {
       title: 'Assessment Pass Mark',
-      dataIndex: 'assessment_weights',
+      dataIndex: 'assessment_pass_mark',
       key: 'assessment_pass_mark',
     
       

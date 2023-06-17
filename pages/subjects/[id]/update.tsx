@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { Button, Typography, Form, Input } from "antd";
+import { Button, Typography, Form, Input, Skeleton } from "antd";
 
 import { makeAuthorizedRequest } from "../../../utils/api";
 import Layouts from "../../../components/Layout";
@@ -16,7 +16,7 @@ const update = () => {
 
   const onFinish = async (values) => {
     try {
-      const response = await makeAuthorizedRequest("course", "PATCH", {
+      const response = await makeAuthorizedRequest(`course/${id}`, "PATCH", {
         course_names: values["course_names"],
         course_codes: values["course_codes"],
         assessment_weights: values["assessment_weights"],
@@ -26,9 +26,10 @@ const update = () => {
         payment_amount_usd: 0,
       });
 
-      if (response.ok) {
+      console.log(response?.data);
+      if (response?.data) {
         // Store the token in local storage or a state management solution
-        router.push("/cources/");
+        router.push("/subjects/");
       } else {
         console.error("registration failed");
       }
@@ -44,12 +45,13 @@ const update = () => {
 
 
   const [itemValues,setItemValues]= useState({})
+  const [loading,seLoading]= useState(true);
   const getIdValues = async () => {
     const idValues = await makeAuthorizedRequest(`course/${id}`);
     if (idValues?.data) {
-      setItemValues(idValues?.data);
-      console.log(idValues?.data?.data)
       console.log(idValues?.data)
+      setItemValues(idValues?.data); 
+      seLoading(false);
     } else {
       console.error("Failed to get the data");
     }
@@ -63,9 +65,9 @@ const update = () => {
   return (
     <>
       <Layouts>
-        <Title className="mb-15">Register Subject</Title>
+        <Title className="mb-15">Update Subject</Title>
 
-        <Form
+        { loading ?  <Skeleton/>  :   <Form
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
           initialValues={itemValues}
@@ -75,7 +77,7 @@ const update = () => {
           <div className="space-x-2 grid grid-cols-3">
             <Form.Item
               className=""
-              label="Course Names"
+              label="Subjects Names"
               name="course_names"
               rules={[
                 {
@@ -88,7 +90,7 @@ const update = () => {
             </Form.Item>
             <Form.Item
               className=""
-              label="Course Codes"
+              label="Subjects Codes"
               name="course_codes"
               rules={[
                 {
@@ -97,7 +99,7 @@ const update = () => {
                 },
               ]}
             >
-              <Input placeholder="course_codes" />
+              <Input placeholder="Subjects Codes" />
             </Form.Item>
             <Form.Item
               className=" "
@@ -140,35 +142,34 @@ const update = () => {
             </Form.Item>
 
             <Form.Item>
+              <div className="flex justify-center items-center space-x-2">
               <Button
                 type="primary"
                 htmlType="submit"
                 style={{
-                  marginTop: 100,
-                  width: "100%",
+                  marginTop: 30,
+                  width: "50%",
                   backgroundColor: "blue",
                 }}
               >
                 Course Register
               </Button>
-            </Form.Item>
-            <Form.Item>
+          
               <Button
-                onClick={() => router.push("/cources/")}
+                onClick={() => router.push("/subjects")}
                 type="primary"
                 style={{
-                  marginTop: 100,
-                  width: "100%",
+                  marginTop: 30,
+                  width: "50%",
                   backgroundColor: "blue",
                 }}
               >
                 Close
               </Button>
+              </div>
             </Form.Item>
           </div>
-        </Form>
-        {/* </Col>  */}
-        {/* </Row>  */}
+        </Form> }
       </Layouts>
     </>
   );
