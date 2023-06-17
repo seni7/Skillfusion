@@ -50,7 +50,7 @@ const UserRegister = () => {
 
       if (response.ok) {
         // Store the token in local storage or a state management solution 
-        router.push("/users/list"); 
+        router.push("/users/"); 
       } else {
         console.error("registration failed");
       }
@@ -403,13 +403,13 @@ const UserRegister = () => {
       </Button>
     </Form.Item>
     <Form.Item>
-      <Button
-        type="primary"
-        htmlType="submit"
-        style={{ width: "100%", backgroundColor: "blue" }}
-      >
-        Close
-      </Button>
+    <Button onClick={()=>router.push('/users/')}
+                type="primary"
+              
+                style={{ marginTop:100, width: "100%", backgroundColor: "blue" }}
+              >
+                Close
+              </Button>
     </Form.Item>
     </div>
         </Form>

@@ -152,25 +152,20 @@ const Layouts = ({children}) => {
             <hr className="divider-line h-px opacity-50" />
           </div>
 
-          
-   
-          <Menu.Item key="studentRegister" icon={<ReadOutlined />}>
-          <Link legacyBehavior href="/student/register">
-    <a>student register</a>
-  </Link>
-          </Menu.Item>
 
           <Menu.Item key="2" icon={<ReadOutlined />}>
-          <Link legacyBehavior href="/CoursePage">
-    <a>Course</a>
+          <Link legacyBehavior href="/cources">
+    <a>Subject</a>
   </Link>
           </Menu.Item>
           
           <Menu.Item key="3" icon={<ProfileOutlined />}>
             Result
           </Menu.Item>
-          <Menu.Item key="4" icon={<ScheduleOutlined />}>
-            Schedule
+          <Menu.Item key="2" icon={<ReadOutlined />}>
+          <Link legacyBehavior href="/acadamicyear">
+    <a>Acadamic Year</a>
+  </Link>
           </Menu.Item>
           <Menu.Item key="5" icon={<CalendarOutlined />}>
             Attendance
@@ -193,7 +188,10 @@ const Layouts = ({children}) => {
             <Menu.Item key="18">Twelve</Menu.Item>
           </SubMenu>
           <SubMenu key="sub3" icon={<UserOutlined />} title="Users">
-            <Menu.Item key="19">Teacher</Menu.Item>
+            <Menu.Item key="19"> <Link legacyBehavior href="/users">
+           <a>Staff</a>
+            </Link>
+           </Menu.Item>
             <Menu.Item key="20">Student</Menu.Item>
           </SubMenu>
           

@@ -11,6 +11,7 @@ import { Typography } from "antd";
  
 import { makeAuthorizedRequest } from "../../utils/api";
 import Layouts from "../../components/Layout"; 
+import Link from "next/link";
  
 export type SF_Notification =
 {
@@ -22,7 +23,7 @@ export type SF_Notification =
  
 };
 
-const StudentList = () => {
+const CourseList = () => {
     const [userTableList,setUserTableList]=useState([]);
     const [api, contextHolder] = notification.useNotification(); 
   
@@ -46,7 +47,7 @@ const StudentList = () => {
       key: 'name',
       render: (_, record) => (
         <Space size="middle">
-          <a onClick={()=>router.push(`/users/${record.id}/info`)}>{record?.profile.first_name +' '+record?.profile.father_name}</a> 
+          <a onClick={()=>router.push(`/users/${record.id}/info`)}>{record?.profile?.first_name +' '+record?.profile?.father_name}</a> 
         </Space>
       ),
       
@@ -166,7 +167,9 @@ const StudentList = () => {
             </Context.Provider>
          <Title  className="mb-15">User List</Title>
 
-
+         <div className="flex justify-end">
+  <Link href="/users/users" className="m-7 px-5 py-2 rounded-md border font-bold">Add Users</Link>
+</div>
 
 
 <Table dataSource={userTableList} columns={columns} />
@@ -178,4 +181,4 @@ const StudentList = () => {
 
  
  
-export default StudentList;
+export default CourseList;
