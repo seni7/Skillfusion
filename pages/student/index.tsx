@@ -133,15 +133,12 @@ const StudentList = () => {
   return (
     <>
       <Layouts>
-         <Context.Provider value={contextValue}>
-            {contextHolder} 
-            </Context.Provider>
-         <Title  className="mb-15">Student List</Title>
-
-
-
-
-<Table dataSource={studentTableList} columns={columns} />
+      
+         <div className=" flex justify-between"> 
+         <Title  className="mb-15">Student List</Title> 
+            <a > <Button  onClick={()=>router.push('/student/register')} > + Add New</Button></a>
+        </div>
+        <Table dataSource={studentTableList} columns={columns} />
        
       </Layouts>
     </>

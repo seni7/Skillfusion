@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Dialog, Disclosure } from '@headlessui/react'
+import Link from "next/link";
 // import { Bars3Icon, MinusSmallIcon, PlusSmallIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { 
   CheckIcon, 
@@ -147,10 +148,10 @@ export default function Example() {
               </a>
             ))}
           </div>
-          <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-            <a        href="/auth/login"  className="text-sm font-semibold leading-6 text-white">
-              Log in <span aria-hidden="true">&rarr;</span>
-            </a>
+          <div className="hidden lg:flex lg:flex-1 lg:justify-end"> 
+            <Link legacyBehavior href="/auth/login" className='text-sm font-semibold leading-6 text-white'>
+              <a href=""  className='text-sm font-semibold leading-6 text-white'>Log in <span aria-hidden="true">&rarr;</span></a>
+            </Link>
           </div>
         </nav>
         <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
