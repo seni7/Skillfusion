@@ -14,7 +14,7 @@ import {
   Input,
   Switch,
 } from "antd";
-import signinbg from "../../public/download_.jpeg";
+import signinbg from "../../public/Welcome.svg";
 import {
   DribbbleOutlined,
   TwitterOutlined,
@@ -23,6 +23,7 @@ import {
   DownloadOutlined
 } from "@ant-design/icons";
 import { makeAuthorizedRequest } from '../../utils/api';
+import illu from '../../public/loginill.jpg'
 // import { DownloadOutlined } from '@mui/icons-material';
 
 const Login = () => {
@@ -30,7 +31,7 @@ const Login = () => {
 const router = useRouter();
   const onFinish = async (values) => { 
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/login', {
+      const response = await fetch('http://192.168.137.91:8000/api/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -69,18 +70,36 @@ const router = useRouter();
 
   return (
     <>
-     <GustLayout>
+     <GustLayout >
+      {/* <div>
+       
+
+      </div> */}
      {/* <Content className="signin"> */}
-            <Row gutter={[24, 0]} justify="space-around">
-              <Col
-                xs={{ span: 24, offset: 0 }}
-                lg={{ span: 6, offset: 2 }}
+     <div className="flex items-center justify-center pt-36 ">
+      <div className="bg-[#ffffff] border-8 border-zinc-400 rounded-2xl">
+        <div className="text-2xl font-bold text-white m-4">
+        <Row gutter={[24, 0]} justify="space-around" >
+        <Col
+                className="sign-img"
+                style={{ padding: 12 }}
+                xs={{ span: 24 }}
+                lg={{ span: 12 }}
+                md={{ span: 12 }}
+              > 
+              
+                 <Image width={400} src= {illu } alt="" className=' sm:block hidden md:block w-auto '/> 
+              </Col>
+              <Col className='pt-24 '
+                xs={{ span: 20, offset: 0 }}
+                lg={{ span: 10, offset: 2 }}
                 md={{ span: 12 }}
               >
-                <Title className="mb-15">Sign In</Title>
-                <Title className="font-regular text-muted" level={5}>
+                
+                <Title>Sign In</Title>
+                {/* <Title className="font-regular text-muted" level={5}>
                   Enter your username and password to sign in
-                </Title>
+                </Title> */}
                 <Form
                   onFinish={onFinish}
                   onFinishFailed={onFinishFailed}
@@ -119,23 +138,20 @@ const router = useRouter();
                     <Button
                       type="primary"
                       htmlType="submit"
-                      style={{ width: "100%", backgroundColor: "blue"}}  >
+                       className='bg-blue-500  text-white font-bold  border-b-4 border-blue-700 hover:border-blue-500 rounded-'>
                       SIGN IN
                     </Button>
                   </Form.Item> 
                   
                 </Form>
               </Col>
-              <Col
-                className="sign-img"
-                style={{ padding: 12 }}
-                xs={{ span: 24 }}
-                lg={{ span: 12 }}
-                md={{ span: 12 }}
-              > 
-                 <Image width={400} src= {signinbg } alt="" /> 
-              </Col>
-            </Row> 
+              
+              
+            </Row>
+        </div>
+        
+      </div>
+    </div>
   
     </GustLayout>
 

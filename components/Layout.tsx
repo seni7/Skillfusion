@@ -242,7 +242,7 @@ const Layouts = ({children}) => {
             </Dropdown>
           </div>
         </Header>
-        <Content className="p-6 overflow-y-auto bg-slate-300" style={{ margin: '24px 16px', padding: 24, minHeight: 280 }}>
+        <Content className="p-6 overflow-y-auto bg-slate-700" style={{ margin: '24px 16px', padding: 24, minHeight: 280 }}>
           {children}
         </Content>
       </Layout>
