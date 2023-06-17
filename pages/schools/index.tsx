@@ -165,7 +165,7 @@ const CourseList = () => {
 
 
          <div className="flex justify-end">
-  <Link href="/schools/schools" className="m-7 px-5 py-2 rounded-md border font-bold">Add New School</Link>
+  <Link href="/schools/schools" className="m-2 px-5 py-2 rounded-md border font-bold">Add New School</Link>
 </div>
 
 <Table dataSource={schoolTableList} columns={columns} />

@@ -161,7 +161,7 @@ const CourseList = () => {
          <Context.Provider value={contextValue}>
             {contextHolder} 
             </Context.Provider>
-         <Title  className="mb-15">Course List</Title>
+         <Title  className="mb-15">School List</Title>
 
 
 
